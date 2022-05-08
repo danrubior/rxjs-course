@@ -1,17 +1,17 @@
 import { ajax } from 'rxjs/ajax';
-import { switchMap, map, concatMap } from 'rxjs/operators';
-import { zip, of, concat } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
+import { zip, of } from 'rxjs';
 
 /**
- * Ejercicio:
+ * Ejercicio: 
  *  Realizar 2 peticiones HTTP (ajax) una después de otra.
- *
+ *  
  *  La primera debe de obtener el personaje de Star Wars:
  *   Luke Skywalker, llamando el endpoint:   /people/1/
- *
+ * 
  *  La segunda petición, debe de ser utilizando el objeto
  *  de la petición anterior, y tomar la especie (species),
- *  que es un arreglo de URLs (array), dentro de ese arreglo,
+ *  que es un arreglo de URLs (array), dentro de ese arreglo, 
  *  tomar la primera posición y realizar la llamada a ese URL,
  *  el cual debería de traer información sobre su especie (Human)
  */
@@ -25,10 +25,10 @@ import { zip, of, concat } from 'rxjs';
 
 // Respuesta esperada con Mayor dificultad
 // Retornar el siguiente objeto con la información de ambas peticiones
-// Recordando que se disparan una después de la otra,
+// Recordando que se disparan una después de la otra, 
 // con el URL que viene dentro del arreglo de 'species'
 
-// Tip: investigar sobre la función zip:
+// Tip: investigar sobre la función zip: 
 //      Que permite combinar observables en un arreglo de valores
 // https://rxjs-dev.firebaseapp.com/api/index/function/zip
 
@@ -38,20 +38,28 @@ import { zip, of, concat } from 'rxjs';
     personaje: {name: "Luke Skywalker", height: "172", mass: "77", hair_color: "blond", skin_color: "fair", …}
 */
 
-(() => {
-  // No tocar ========================================================
-  const SW_API = 'https://swapi.dev/api';
-  // ==================================================================
 
-  // Realizar el llamado al URL para obtener a Luke Skywalker
-  ajax
-    .getJSON(`${SW_API}/people/1`)
-    .pipe(
-      switchMap(resp =>
-        zip(of(resp), ajax.getJSON(resp['starships'][0]))
-      ),
-      map(([personaje, nave]) => ({ personaje, nave }))
-    )
-    .subscribe(console.log); // ==
-  // =======================================
+(() =>{
+
+    // No tocar ========================================================
+    const SW_API = 'https://swapi.dev/api';                     
+    const getRequest = ( url: string ) => ajax.getJSON<any>(url);
+    // ==================================================================
+
+    // Realizar el llamado al URL para obtener a Luke Skywalker
+    getRequest(`Aquí va un URL`).pipe(
+        // Realizar los operadores respectivos aquí
+        
+
+
+        
+
+    // NO TOCAR el subscribe ni modificarlo ==
+    ).subscribe( console.log )           // ==
+    // =======================================
+
+
+
 })();
+
+		
